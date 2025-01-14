@@ -43,4 +43,10 @@ class AssginedController extends Controller
 
         return response()->json($assigned, 201);
     }
+
+    public function deleteAssigned($id) {
+        $assigned = Assigned::find($id);
+        $assigned->delete();
+        return response()->json(null, 204);
+    }
 }
