@@ -9,10 +9,12 @@ class Assigned extends Model
 {
     use HasFactory;
 
+    protected $table = 'assigned';
+
     protected $fillable = [
-        'officerId',
-        'dutyId',
-        'offiicer',
+        'officer_id',
+        'duty_id',
+        'officer',
         'duty',
         'date',
         'code',
