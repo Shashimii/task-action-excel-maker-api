@@ -13,8 +13,28 @@ class DutyController extends Controller
         return response()->json($duties);
     }
 
+    
+    public function editDuty(Request $request, $id)
+    {
+        $duty = Duty::find($id);
+
+        if (!$duty) {
+            return response()->json(['message' => 'Duty not found'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'duty' => 'string|max:255',
+        ]);
+
+        $duty->duty = $validatedData['duty'];
+        $duty->save();
+
+        return response()->json(['message' => 'Duty updated successfully'], 204);
+    }
+
+
     public function deleteDuty($id) {
-        
+
         $duty = Duty::find($id);
 
         if (!$duty) {

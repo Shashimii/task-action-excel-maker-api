@@ -29,6 +29,10 @@ Route::get('/fetchAssigned', [AssginedController::class, 'fetchAll']);
 // post data
 Route::post('/addAssigned', [AssginedController::class, 'storeAssigned']);
 
+// edit data
+Route::patch('/editOfficer/{id}', [OfficerController::class, 'editOfficer']);
+Route::patch('/editDuty/{id}', [DutyController::class, 'editDuty']);
+
 // delete data
 Route::delete('/deleteAssigned/{id}', [AssginedController::class, 'deleteAssigned']);
 Route::delete('/deleteOfficer/{id}', [OfficerController::class, 'deleteOfficer']);

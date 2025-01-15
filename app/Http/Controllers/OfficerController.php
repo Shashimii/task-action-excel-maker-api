@@ -12,6 +12,26 @@ class OfficerController extends Controller
         $officer = Officer::latest()->select('id', 'name')->get();
         return response()->json($officer);
     }
+        
+    public function editOfficer(Request $request, $id)
+    {
+        $officer = Officer::find($id);
+
+        if (!$officer) {
+            return response()->json(['message' => 'Officer not found'], 404);
+        }
+
+        $validatedData = $request->validate([
+            'name' => 'string|max:255',
+        ]);
+
+        $officer->name = $validatedData['name'];
+        $officer->save();
+
+        return response()->json(['message' => 'Officer updated successfully'], 204);
+    }
+
+    
 
     public function deleteOfficer($id) {
 
