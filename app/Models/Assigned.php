@@ -21,4 +21,8 @@ class Assigned extends Model
         'officerIndex',
         'dutyIndex'
     ];
+
+    public function officer() {
+        return $this->belongsTo(Officer::class, 'officer_id');
+    }
 }

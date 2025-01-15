@@ -12,4 +12,8 @@ class Officer extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function assignedDuties() {
+        return $this->hasMany(Assigned::class, 'officer_id');
+    }
 }

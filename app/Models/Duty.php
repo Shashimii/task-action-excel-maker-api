@@ -12,4 +12,8 @@ class Duty extends Model
     protected $fillable = [
         'duty'
     ];
+
+    public function assignedDuties() {
+        return $this->hasMany(Assigned::class, 'duty_id');
+    }
 }
