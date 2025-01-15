@@ -31,4 +31,6 @@ Route::post('/addAssigned', [AssginedController::class, 'storeAssigned']);
 
 // delete data
 Route::delete('/deleteAssigned/{id}', [AssginedController::class, 'deleteAssigned']);
+Route::delete('/deleteOfficer/{id}', [OfficerController::class, 'deleteOfficer']);
+Route::delete('/deleteDuty/{id}', [DutyController::class, 'deleteDuty']);
 

@@ -9,7 +9,22 @@ use App\Models\Officer;
 class OfficerController extends Controller
 {
     public function fetchAll() {
-        $duties = Officer::latest()->select('id', 'name')->get();
-        return response()->json($duties);
+        $officer = Officer::latest()->select('id', 'name')->get();
+        return response()->json($officer);
+    }
+
+    public function deleteOfficer($id) {
+
+        $officer = Officer::find($id);
+
+        if (!$officer) {
+            return response()->json(['error' => 'Officer not found'], 404);
+        }
+
+        $officer->assignedDuties()->delete();
+        $officer->delete();
+
+        return response()->json(null, 204);
+
     }
 }
