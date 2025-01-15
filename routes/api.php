@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssginedController;
 use App\Http\Controllers\DutyController;
 use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// User login
+Route::get('/sanctum/csrf-cookie', [AuthController::class, 'csrfCookie']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 
 // fetch data
 Route::get('/fetchDuties', [DutyController::class, 'fetchAll']);
