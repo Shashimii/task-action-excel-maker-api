@@ -5,12 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Officer;
+use Validator;
 
 class OfficerController extends Controller
 {
     public function fetchAll() {
         $officer = Officer::latest()->select('id', 'name')->get();
         return response()->json($officer);
+    }
+
+    public function storeOfficer(Request $request) {
+        $validator = Validator::make($request->all() , [
+            'name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $officer = Officer::create([
+            'name' => $request->name
+        ]);
+
+        return response()->json($officer, 201);
     }
         
     public function editOfficer(Request $request, $id)

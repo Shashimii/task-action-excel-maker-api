@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Duty;
+use Validator;
 
 class DutyController extends Controller
 {
@@ -13,6 +14,21 @@ class DutyController extends Controller
         return response()->json($duties);
     }
 
+    public function storeDuty(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'duty' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $duty = Duty::create([
+            'duty' => $request->duty
+        ]);
+
+        return response()->json($duty, 201);
+    }
     
     public function editDuty(Request $request, $id)
     {

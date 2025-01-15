@@ -28,6 +28,8 @@ Route::get('/fetchAssigned', [AssginedController::class, 'fetchAll']);
 
 // post data
 Route::post('/addAssigned', [AssginedController::class, 'storeAssigned']);
+Route::post('/addOfficer', [OfficerController::class, 'storeOfficer']);
+Route::post('/addDuty', [DutyController::class, 'storeDuty']);
 
 // edit data
 Route::patch('/editOfficer/{id}', [OfficerController::class, 'editOfficer']);
